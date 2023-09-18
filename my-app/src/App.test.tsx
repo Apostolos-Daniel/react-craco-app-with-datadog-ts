@@ -1,9 +1,28 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+const unmockedFetch = global.fetch;
+
+beforeAll(() => {
+  global.fetch = () =>
+    Promise.resolve({
+      json: () =>
+        Promise.resolve({
+          Amount: 10,
+        }),
+    } as Response);
+});
+
+afterAll(() => {
+  global.fetch = unmockedFetch;
+});
+
+test("renders paid note", async () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const button = screen.getByText(/Pay me/i);
+  fireEvent.click(button);
+
+  const txtPaid = await screen.findByText(/Paid £10/i);
+  expect(txtPaid).toBeInTheDocument();
 });
