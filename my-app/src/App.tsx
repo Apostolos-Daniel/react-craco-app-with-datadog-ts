@@ -42,7 +42,7 @@ React.useEffect(() => {
           <div>
             <button type="button" onClick={handlePayment}
               style={{ fontSize: "200px", height: '300px', width: '1000px' }} >
-              Pay me
+              💸 Pay 💸
             </button>
           </div>}
         {hasPaid && <div>Paid £{amount.Amount ?? "N/A"}</div>}

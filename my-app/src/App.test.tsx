@@ -20,7 +20,7 @@ afterAll(() => {
 
 test("renders paid note", async () => {
   render(<App />);
-  const button = screen.getByText(/Pay me/i);
+  const button = screen.getByText(/💸 Pay 💸/i);
   fireEvent.click(button);
 
   const txtPaid = await screen.findByText(/Paid £10/i);
