@@ -14,9 +14,7 @@ function App() {
       endpoint: apiEndpoint
     });
 
-    fetch(apiEndpoint, {
-      mode: 'no-cors'
-    })
+    fetch(apiEndpoint)
       .then(response => {
         return response.json();
       })
@@ -34,8 +32,6 @@ React.useEffect(() => {
     hasPaid: hasPaid,
     amount: amount.Amount
   });
-  console.log(hasPaid);
-  console.log(amount);
 }, [hasPaid, amount]); // Effect dependency on hasPaid
 
   //style="font-size : 20px; width: 100%; height: 100px;
