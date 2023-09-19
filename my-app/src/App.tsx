@@ -28,9 +28,13 @@ function App() {
 
   // To execute code after hasPaid has actually changed
   React.useEffect(() => {
-    datadogRum.setGlobalContextProperty("order", {
+    datadogRum.setGlobalContextProperty("payment", {
       hasPaid: hasPaid,
       amount: amount.Amount,
+    });
+    datadogRum.addAction("payment", {
+      hasPaid: hasPaid, // for example, 42.12
+      amount: amount.Amount, // for example, ['tomato', 'strawberries']
     });
   }, [hasPaid, amount]); // Effect dependency on hasPaid
 
@@ -41,9 +45,14 @@ function App() {
         {!hasPaid && (
           <div>
             <button
+              data-dd-action-name="Payment"
               type="button"
               onClick={handlePayment}
-              style={{ fontSize: "200px", height: "300px", width: "1000px" }}
+              style={{
+                fontSize: "200px",
+                height: "300px",
+                width: "1000px",
+              }}
             >
               💸 Pay 💸
             </button>
